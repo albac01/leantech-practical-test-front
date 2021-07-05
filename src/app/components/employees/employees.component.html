@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-6">
+        <h4>Listing Criteria</h4>
+        <hr>
+        <form autocomplete="on" (ngSubmit)="getEmployees(criteria)" #criteria="ngForm">
+            <div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Person Name</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="Person name" name="person"
+                            #person="ngModel" [ngModel]="criterios.person">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Position Name</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="Position name" name="position"
+                            #position="ngModel" [ngModel]="criterios.position">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">&nbsp;</label>
+                    <div class="input-group col-md-8">
+                        <button type="submit" class="btn btn-outline-primary btn-block">
+                            List Employees
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<ng-container *ngIf="employees.length > 0; then thenTemplate; else elseTemplate"></ng-container>
+<ng-template #thenTemplate>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Result List</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Last name</th>
+                        <th>Person ID</th>
+                        <th>Potision</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees">
+                        <td>{{ employee.id }}</td>
+                        <td>{{ employee.person.name }}</td>
+                        <td>{{ employee.person.lastName }}</td>
+                        <td>{{ employee.person.id }}</td>
+                        <td>{{ employee.position.name }}</td>
+                        <td>{{ employee.salary | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-template>
+<ng-template #elseTemplate>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>No results</h4>
+        </div>
+    </div>
+</ng-template>
