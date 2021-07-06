@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
-import { ResultData } from 'src/app/interfaces/employee';
+import { Router } from '@angular/router';
+import { Employee, ResultData } from 'src/app/interfaces/employee';
 import { EmployeesService } from "src/app/services/employees.service";
 
 @Component({
@@ -12,14 +13,14 @@ import { EmployeesService } from "src/app/services/employees.service";
 export class EmployeesComponent implements OnInit {
 
   // response array is initialized as an empty array
-  employees :ResultData[] = []
+  employees :Employee[] = []
 
   criterios = {
     position: "",
     person: ""
   }
 
-  constructor(private employeeService: EmployeesService) { }
+  constructor(private employeeService: EmployeesService, private router: Router) { }
 
   ngOnInit(): void {}
 
@@ -32,6 +33,11 @@ export class EmployeesComponent implements OnInit {
         this.employees = response.data;
       }
     );
+  }
+
+  updateEmployee(emp: Employee){
+    console.log(emp);
+    this.router.navigate(['update', emp]);
   }
 
 }

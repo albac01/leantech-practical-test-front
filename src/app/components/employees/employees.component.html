@@ -45,6 +45,7 @@
                         <th>Person ID</th>
                         <th>Potision</th>
                         <th>Salary</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,8 @@
                         <td>{{ employee.person.id }}</td>
                         <td>{{ employee.position.name }}</td>
                         <td>{{ employee.salary | currency}}</td>
+                        <td><button class="btn btn-outline-secondary btn-block"
+                                (click)="updateEmployee(employee)">Update Employee</button></td>
                     </tr>
                 </tbody>
             </table>

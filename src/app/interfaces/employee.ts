@@ -1,5 +1,5 @@
 export interface Employee {
-    id: number,
+    id?: number,
     person: Person,
     position: Position,
     salary: number
@@ -8,14 +8,14 @@ export interface Employee {
 export interface Person {
     id: string,
     name: string, 
-    lastname: string,
+    lastName: string,
     address: string,
-    cellphone: string,
-    cityname: string
+    cellPhone: string,
+    cityName: string
 }
 
 export interface Position {
-    id: number,
+    id?: number,
     name: string
 }
 

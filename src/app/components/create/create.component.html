@@ -1,12 +1,102 @@
 <div class="row">
     <div class="col md-6">
-        <h1>Create Employee</h1>
+        <h4>Create Employee</h4>
+        <hr>
+        <form (ngSubmit)="createEmployee(form)" #form="ngForm">
+            <div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Candidate ID</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="ID" name="personId"
+                            [ngModel]="newEmployee.personId" #personId="ngModel" required
+                            [class.is-invalid]="(personId.invalid && personId.touched) || (personId.invalid && form.submitted)">
+                        <small *ngIf="personId.invalid && personId.touched" class="form-text text-danger">This is a
+                            required field</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Name</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="Name" name="name"
+                            [ngModel]="newEmployee.name" #name="ngModel" required
+                            [class.is-invalid]="(name.invalid && name.touched) || (name.invalid && form.submitted)">
+                        <small *ngIf="name.invalid && name.touched" class="form-text text-danger">This is a
+                            required field</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Last Name</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="Last Name" name="lastName"
+                            [ngModel]="newEmployee.lastName" #lastName="ngModel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Address</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="Address" name="address"
+                            [ngModel]="newEmployee.address" #address="ngModel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Cell Phone</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="Cell Phone" name="cellPhone"
+                            [ngModel]="newEmployee.cellPhone" #cellPhone="ngModel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">City Name</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="City Name" name="cityName"
+                            [ngModel]="newEmployee.cityName" #cityName="ngModel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Position</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" placeholder="Position Name" name="positionName"
+                            [ngModel]="newEmployee.positionName" #positionName="ngModel" required
+                            [class.is-invalid]="(positionName.invalid && positionName.touched) || (positionName.invalid && form.submitted)">
+                        <small *ngIf="positionName.invalid && positionName.touched" class="form-text text-danger">This
+                            is a
+                            required field</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Salary</label>
+                    <div class="col-8">
+                        <input class="form-control" type="number" placeholder="Salary" name="salary"
+                            [ngModel]="newEmployee.salary" #salary="ngModel" required min="1"
+                            [class.is-invalid]="(salary.value <= 0 && salary.touched) || (salary.invalid && salary.touched) || (salary.invalid && form.submitted)">
+                        <small *ngIf="(salary.value <= 0 && salary.touched) || (salary.invalid && salary.touched)"
+                            class="form-text text-danger">This is a
+                            required field greater than cero</small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">&nbsp;</label>
+                    <div class="input-group col-md-8">
+                        <button type="submit" class="btn btn-primary btn-block"
+                            [disabled]="form.invalid || salary.value <= 0">
+                            Create Employee
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
-<div class="row">
-    <div class="col md-6 border">
-        <form action="">
-            
-        </form>
+<div class="row" *ngIf="operationResult.operation != ''">
+    <div class="col-md-6">
+        <ng-container *ngIf="operationResult.result == 'SUCCESS'; then thenTemplate; else elseTemplate">
+        </ng-container>
+        <ng-template #thenTemplate>
+            <div class="alert alert-success" role="alert">The employee was successfuly created</div>
+        </ng-template>
+        <ng-template #elseTemplate>
+            <div class="alert alert-danger" role="alert">The employee creation failed: {{ operationResult.cause }}</div>
+        </ng-template>
     </div>
 </div>
